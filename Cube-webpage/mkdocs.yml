@@ -1,0 +1,46 @@
+site_name: Suricube
+theme:
+  name: mkdocs 
+  #name: readthedocs 
+  logo: ./img/logo.png
+
+extra_javascript: 
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML #Adding maths
+  - https://cdn.jsdelivr.net/npm/vega@5       # charts
+  - https://cdn.jsdelivr.net/npm/vega-lite@5  # charts
+  - https://cdn.jsdelivr.net/npm/vega-embed@6 # charts
+
+plugins:
+  - search
+  - charts
+  - with-pdf:
+      #render_js: true
+      #headless_chrome_path: chromium-browser
+
+markdown_extensions:
+  - admonition
+  - mdx_math # Adding maths
+  - pymdownx.highlight:
+      use_pygments: false # pygment is broken on my pc
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: vegalite
+          class: vegalite
+          format: !!python/name:mkdocs_charts_plugin.fences.fence_vegalite
+        
+nav:
+  - Galaxy Cube: index.md
+  - Hardware specification: hardware_specs.md
+  - Signal generation: signal_generation_logic.md
+  - Usage: usage.md
+  - Applications :
+    - Simple scanning pattern : ./webUI/ssp.md
+  - Code Examples:
+    - Signal generation: ./examples/step_signal.md
+    - Python communication: ./examples/calibration.md
+  - API:
+    - Documentation: ../api/api.html
+    - Update documentation : ../update
+    - Download specification: ../api/api.yaml
