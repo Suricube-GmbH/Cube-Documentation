@@ -18,6 +18,6 @@ jobs:
       - run: pip install mkdocs
       - run: pip install python-markdown-math
       - run: pip install mkdocs-charts-plugin
-      - run: pip install pymdown-extensions
       - run: pip install Pygments
+      - run: cd ./Webpage
       - run: mkdocs gh-deploy --force
