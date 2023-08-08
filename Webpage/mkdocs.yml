@@ -35,6 +35,10 @@ nav:
   - Hardware specification: hardware_specs.md
   - Signal generation: signal_generation_logic.md
   - Usage: usage.md
+  - Modules:
+      - Analog signal generation: ./analog_signal_generator.md
+      - Digital signal generation: ./digital_signal_generator.md
+      - External triggering: ./external_triggering.md 
   - Applications :
     - Simple scanning pattern : ./webUI/ssp.md
   - Code Examples:
