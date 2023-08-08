@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Signal generation - Suricube</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Signal generation";
+        var mkdocs_page_input_path = "signal_generation_logic.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Galaxy Cube</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hardware_specs/">Hardware specification</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Signal generation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#principle">Principle</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sections-and-section-order">Sections and section order</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#raw-vs-voltage-sections">Raw vs voltage sections</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Modules</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../analog_signal_generator/">Analog signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../digital_signal_generator/">Digital signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../external_triggering/">External triggering</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../webUI/ssp/">Simple scanning pattern</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/step_signal/">Signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/calibration/">Python communication</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/api.html">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../update">Update documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/api.yaml">Download specification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Suricube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li class="breadcrumb-item active">Signal generation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="signal-generation-logic">Signal generation logic</h1>
+<h2 id="principle">Principle</h2>
+<p>The Signal Generators are based on an integrator design :   </p>
+<p>
+<script type="math/tex; mode=display">
+Output_n = S^0_n          \\
+S^0_{n+1}= S^0_n + \Delta t * S^1_n \\
+S^1_{n+1}= S^1_n + \Delta t * S^2_n \\
+S^2_{n+1}= S^2_n + \Delta t * S^3_n \\
+S^3_{n+1}= S^3_n           
+</script>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The actual implementation is a bit more complex, as we’re working with (different) finite-bit number representations. We also need to do some unit conversions to take into account the cycle period, and to convert between output voltage and internal number.</p>
+</div>
+<p>A very natural way to control the output is to specify (S00, S10, S20, S30), and then let the integrator run for a period of time. After some time, we can then give a new set of values, changing the output. 
+This system allows to generate any <em>3rd degree polynomial</em>, which in turn allows to approximate any waveform. </p>
+<h2 id="example">Example</h2>
+<p>[get picture from the Rust simulation]</p>
+<h2 id="sections-and-section-order">Sections and section order</h2>
+<p>In the cube, an output signal is defined like a piecewise function. Every piece (we call them sections) can be up to a 3rd degree polynomial, and is defined for a specific length. We then specify how the pieces are combined together to form the whole function. There are 2 questions to answer : 
+How are the pieces chained together ? 
+What kind of transition should there be between each section ? The cube is capable of doing discontinuous, continuous, C1-continous or C2-continous transitions.
+Note : C2-transition is actually not a transition at all, as you’re not changing any of the internal integrator's values. </p>
+<h2 id="raw-vs-voltage-sections">Raw vs voltage sections</h2>
+<p>There are 2 ways to define the sections :</p>
+<ul>
+<li><strong>Raw sections</strong> : the values are signed 64-bits numbers, and are sent as-is to the FPGA. </li>
+<li><strong>Voltage sections</strong> : Instead of giving the values for the 4 first derivatives, you select instead the starting point, the ending point, and the slope/   derivative at the start and ending point. You then select which kind of interpolation you would have : constant, linear, quadratic or cubic. The values are converted from Volt , Volt/s, etc… into the appropriate values for the FPGA - taking into account the DAC calibration and the FPGA clock speed.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../hardware_specs/" class="btn btn-neutral float-left" title="Hardware specification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../hardware_specs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/mkdocs-charts-plugin.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
