@@ -15,10 +15,13 @@ jobs:
         with:
           python-version: 3.x
           
-      - run: pip install mkdocs
-      - run: pip install python-markdown-math
-      - run: pip install mkdocs-charts-plugin
-      - run: pip install Pygments
-      - run: |
+      - name: Installing mkdocs + plugins
+        run: |
+          pip install mkdocs
+          pip install python-markdown-math
+          pip install mkdocs-charts-plugin
+          pip install Pygments
+      - name: Deploying site
+        run: |
           cd ./Webpage
           mkdocs gh-deploy --force
