@@ -1,7 +1,7 @@
 site_name: Suricube
 theme:
-  name: mkdocs 
-  #name: readthedocs 
+  #name: mkdocs 
+  name: readthedocs 
   logo: ./img/logo.png
 
 extra_javascript: 
@@ -13,7 +13,7 @@ extra_javascript:
 plugins:
   - search
   - charts
-  - with-pdf:
+  #- with-pdf:
       #render_js: true
       #headless_chrome_path: chromium-browser
 
