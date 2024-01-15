@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Signal generation - Suricube</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Signal generation";
+        var mkdocs_page_input_path = "signal_generation_logic.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Galaxy Cube</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hardware_specs/">Hardware specification</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../modules_overview/">Capacities overview</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Signal generation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-principle">General principle</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implementation-options">Implementation options</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#raw-vs-voltage-sections">Raw vs voltage sections</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">FPGA Modules</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/analog_signal_generator/">Analog signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/digital_signal_generator/">Digital signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/pulse_forwarder/">Pulse forwarder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/external_triggering/">External triggering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/signal_summer/">Signal summer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/slow_dac/">Slow analog output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../modules/digital_galvo_driver/">Digital galvomirror</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../webUI/ssp/">Simple scanning pattern</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/step_signal/">Signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/calibration/">Python communication</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../api/api.html">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../update">Update documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/api.yaml">Download specification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Suricube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Signal generation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="signal-generation-logic">Signal generation logic</h1>
+<h2 id="general-principle">General principle</h2>
+<p>The Signal Generators are based on an integrator design :   </p>
+<p>
+<script type="math/tex; mode=display">
+Output_n = S^0_n          \\
+S^0_{n+1}= S^0_n + \Delta t * S^1_n \\
+S^1_{n+1}= S^1_n + \Delta t * S^2_n \\
+S^2_{n+1}= S^2_n + \Delta t * S^3_n \\
+S^3_{n+1}= S^3_n           
+</script>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The actual implementation is a bit more complex, as we’re working with (different) finite-bit number representations. We also need to do some unit conversions to take into account the cycle period, and to convert between output voltage and internal number.</p>
+</div>
+<p>A very natural way to control the output is to specify <script type="math/tex">Section=(S^0_0, S^1_0, S^2_0, S^3_0, length)</script> and then let the integrator run for a period of time. After a predefined amount of time, we can then give a new set of values, changing the output. 
+This system allows to generate any <em>3rd degree polynomial</em>, which in turn allows to approximate any waveform. </p>
+<p>
+<script type="math/tex; mode=display">
+     output(t) = \begin{cases}  
+          f(section_0, t) \text{ for } 0 \le t < length_0 \\
+          f(section_1, t) \text{ for } length_0 \le t < length_1 \\
+          ... \\
+          f(section_{last}, t) \text{ for } length_{last -1 } \le t < length_{last} \\
+          \end{cases}
+</script>
+</p>
+<h2 id="example">Example</h2>
+<p><img alt="A single section" src="../img/simulation_single_section.png" title="test" />
+<em>Simulation of single sections. The different types of polynomials possible are displayed. The number of a signal is equivalent to it's polynomial degree</em>.</p>
+<p><img alt="A signal example" src="../img/simulation_sections.png" />
+<em>Simulation of a signal, consisting of 4 different linear sections. It's repeated once</em></p>
+<h2 id="implementation-options">Implementation options</h2>
+<p>In pratice, there are a couple more questions to solve :</p>
+<ul>
+<li>As the signal is a piecewise function, what kind of <strong>continuity</strong> should there be between each section?  <ul>
+<li>discontinous : at the transition tick, we replace all <script type="math/tex">S^x</script> values with the new ones.</li>
+<li>
+<script type="math/tex">C^0</script> (continous) : <script type="math/tex"> S^0 = S^0_{old}</script>, the 3 others values are replaced </li>
+<li>
+<script type="math/tex">C^1</script> (continous and continous first derivative) : <script type="math/tex"> (S^0, S^1, S^2, S^3) = (S^0_{old}, S^1_{old}, S^2_{new}, S^3_{new}) </script>
+</li>
+<li>
+<script type="math/tex">C^2</script> : <script type="math/tex"> (S^0, S^1, S^2, S^3) = (S^0_{old}, S^1_{old}, S^2_{old}, S^3_{new}) </script>
+</li>
+</ul>
+</li>
+<li>Instead of only giving one array <script type="math/tex"> [ section_0, section_1, section_2, ... ] </script>, we have one array containing all the 
+     section definitions, and than the ASG gets an array having pointers to the section and decribing the transition :<br />
+<script type="math/tex"> [(\text{pointer to section}, \text{transition type}), (\text{pointer to section}, \text{transition type}), ...] </script>. <br />
+     The signal generator then steps through that array, and when it reaches the end starts over.
+     <em>This is especially usefull for reducing memory usage of signals with pattern, like a staircase signal (flat, up, flat, up, ...).</em></li>
+<li>In pratical, we might not want infinitely looping signal generators. To more finely control their behaviour, there are 2 mechanisms :<ul>
+<li>internal control : each signal generator counts how many sections and how many periods it already generated. It's possible 
+      to configure them so that they stop (or pause ?) after a specified amount.</li>
+<li>external control : the triggering modules can also send a pause or stop command to the signal generator.  </li>
+</ul>
+</li>
+</ul>
+<h2 id="raw-vs-voltage-sections">Raw vs voltage sections</h2>
+<p>There are 2 ways to define the sections :</p>
+<ul>
+<li><strong>Raw sections</strong> : the values are signed 64-bits numbers, and are sent as-is to the FPGA. </li>
+<li><strong>Voltage sections</strong> : Instead of giving the values for the 4 first derivatives, you select instead the starting point, the ending point, and the slope/   derivative at the start and ending point. You then select which kind of interpolation you would have : constant, linear, quadratic or cubic. The values are converted from Volt , Volt/s, etc… into the appropriate values for the FPGA - taking into account the DAC calibration and the FPGA clock speed.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../modules_overview/" class="btn btn-neutral float-left" title="Capacities overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../usage/" class="btn btn-neutral float-right" title="Usage">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../modules_overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/mkdocs-charts-plugin.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

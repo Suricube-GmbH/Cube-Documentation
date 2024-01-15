@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Suricube</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Galaxy Cube";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".">
+          <img src="img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Galaxy Cube</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#features">Features</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#general-description">General description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#production-highlights">Production Highlights</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#high-speed-analog-output">High-speed analog output</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#low-speed-analog-output">Low-speed analog output</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#digital-ios">Digital I/Os</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#easy-integration">Easy integration</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="hardware_specs/">Hardware specification</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="modules_overview/">Capacities overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="signal_generation_logic/">Signal generation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">FPGA Modules</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/analog_signal_generator/">Analog signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/digital_signal_generator/">Digital signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/pulse_forwarder/">Pulse forwarder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/external_triggering/">External triggering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/signal_summer/">Signal summer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/slow_dac/">Slow analog output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="modules/digital_galvo_driver/">Digital galvomirror</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="webUI/ssp/">Simple scanning pattern</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="examples/step_signal/">Signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="examples/calibration/">Python communication</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../api/api.html">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../update">Update documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/api.yaml">Download specification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Suricube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Galaxy Cube</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="welcome-to-galaxy-cube-documentation">Welcome to Galaxy Cube documentation</h1>
+<p>Pre-release version</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>4 high-speed analog outputs</li>
+<li>8 low-speed analog outputs</li>
+<li>16 digital input/outputs</li>
+<li>Arbitrary synchronous waveforms</li>
+<li>Ethernet communication</li>
+</ul>
+<h2 id="general-description">General description</h2>
+<p>The Galaxy Cube is a microscopy hardware controller. Thanks to its arbitrary analog output, it can create the needed waveforms for any device controlled by analog signals, like galvo mirrors. The digital outputs create trigger lines for laser, camera or other digitally-controlled devices.</p>
+<p>Communication to and from the Galaxy Cube is done through a local network. Simply connect the Cube to the same network as your workstation! With a web browser, you can use the Cube for simple use-cases without need to code anything. For higher modularity needs, an MQTT-based API is accessible, allowing to integrate all the functionalities of the Cube into your existing setup.</p>
+<h2 id="production-highlights">Production Highlights</h2>
+<h3 id="high-speed-analog-output">High-speed analog output</h3>
+<ul>
+<li>Update rate : 1 MHz</li>
+<li>Voltage range : -5V to +5V.</li>
+<li>Settling time : ~100ns</li>
+<li>Able to generate arbitrary functions.</li>
+<li>Can be used to control galvo mirrors.</li>
+</ul>
+<h3 id="low-speed-analog-output">Low-speed analog output</h3>
+<ul>
+<li>Update rate : 50 kHz</li>
+<li>Voltage range : 0 to +5V</li>
+<li>Settling time : 2.5 us (typical)</li>
+<li>Used for Laser/LED intensity,etc</li>
+</ul>
+<h3 id="digital-ios">Digital I/Os</h3>
+<ul>
+<li>Update rate : 50 MHz</li>
+<li>Logic level : 3.3V</li>
+<li>Used to get and send trigger signals.</li>
+</ul>
+<h3 id="easy-integration">Easy integration</h3>
+<ul>
+<li>Internal Web server for WebUI</li>
+<li>Internal MQTT broker</li>
+<li>Easy-to-use API</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="hardware_specs/" class="btn btn-neutral float-right" title="Hardware specification">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="hardware_specs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="js/mkdocs-charts-plugin.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2024-01-15 13:01:35.597907+00:00
+-->

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Python communication - Suricube</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Python communication";
+        var mkdocs_page_input_path = "examples/calibration.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Galaxy Cube</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../hardware_specs/">Hardware specification</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modules_overview/">Capacities overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../signal_generation_logic/">Signal generation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">FPGA Modules</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/analog_signal_generator/">Analog signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/digital_signal_generator/">Digital signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/pulse_forwarder/">Pulse forwarder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/external_triggering/">External triggering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/signal_summer/">Signal summer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/slow_dac/">Slow analog output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/digital_galvo_driver/">Digital galvomirror</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../webUI/ssp/">Simple scanning pattern</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Examples</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../step_signal/">Signal generation</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Python communication</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-idea">General idea</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code">Code</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../api/api.html">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../update">Update documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../api/api.yaml">Download specification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Suricube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Code Examples</li>
+      <li class="breadcrumb-item active">Python communication</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="python-communication">Python communication</h1>
+<h2 id="general-idea">General idea</h2>
+<p>To start using the Cube with your python code, you'll need an MQTT library for Python. 
+We found that <a href="https://pypi.org/project/paho-mqtt/">paho-mqtt</a> was very nice and easy 
+to use. Try to connect to the Cube through MQTT and send dummy messages to check if 
+this part is already working. </p>
+<p>Now you'll need to write the correct message to the cube. Look at the API documentation
+to determine how it should look like, and what the options are. You can generate the 
+JSON string manually (like in this example code).</p>
+<p>Probably a better idea (but more work), is to create a python structure which replicates
+the JSON object to pass, so that you can then serialize it. If you don't want to 
+do this manually, you can try to use the JSON schemas from the API docs and use 
+a datamodel code generator, like <a href="https://docs.pydantic.dev/latest/datamodel_code_generator/">this one for pydantic</a></p>
+<h2 id="code">Code</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The code is only inteded to give a rough idead about how to start working.
+It is not robust, nor is it up-to-date to the API of the Cube.</p>
+</div>
+<pre class="highlight"><code class="language-python"># -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 13 16:06:50 2023
+
+@author: Sebastian Hambura
+"""
+
+# %% Communication with the Galaxy Streamer
+import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
+import time
+
+def raw_value_command(value):
+    command = \
+        """{
+    "name": "Name",
+    "device": "ASG",
+    "payload": {
+        "cmd": "load_raw_sections",
+        "config": {
+            "sections": [
+                {
+                    "s0_0": """ + str(value) + """,
+                    "s1_0": 0,
+                    "s2_0": 0,
+                    "s3_0": 0,
+                    "length": 100,
+                    "interpolation": "cubic"
+                },
+                {
+                    "s0_0": """ + str(value) + """,
+                    "s1_0": 0,
+                    "s2_0": 0,
+                    "s3_0": 0,
+                    "length": 100,
+                    "interpolation": "cubic"
+                }
+            ],
+            "section_order": [
+                {
+                    "number": 0,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 1,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 0,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 1,
+                    "transition": "discontinous"
+                }
+            ]
+        }
+    }
+}
+        """
+
+    return command
+
+def voltage_value_command(value):
+    command = \
+        """{
+    "name": "Name",
+    "device": "ASG",
+    "payload": {
+        "cmd": "load_voltage_sections",
+        "config": {
+            "sections": [
+                {
+                    "starting_level": """ + str(value) + """,
+                    "starting_derivative": 0,
+                    "ending_level": 0,
+                    "ending_derivative": 0,
+                    "duration_in_ms": 1,
+                    "interpolation": "constant"
+                },
+                {
+                    "starting_level": """ + str(value) + """,
+                    "starting_derivative": 0,
+                    "ending_level": 0,
+                    "ending_derivative": 0,
+                    "duration_in_ms": 1,
+                    "interpolation": "constant"
+                }
+            ],
+            "section_order": [
+                {
+                    "number": 0,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 1,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 0,
+                    "transition": "discontinous"
+                },
+                {
+                    "number": 1,
+                    "transition": "discontinous"
+                }
+            ]
+        }
+    }
+}
+        """
+
+    return command
+
+def start_command():
+    command = \
+        """
+{
+    "name": "Name",
+    "device": "ASG", 
+    "payload":{
+        "cmd": "start"
+    }
+}        
+        """
+    return command
+
+def set_Streamer_raw_value(value):
+    MQTT_topic = "suricube/galaxy_cube/11/analog_signal_generator"
+    publish.single(MQTT_topic, payload=raw_value_command(value),  hostname="192.168.1.111", port=1884, protocol=mqtt.MQTTv5, client_id="Python test")
+    time.sleep(0.5)
+    publish.single(MQTT_topic, payload=start_command(),  hostname="192.168.1.111", port=1884, protocol=mqtt.MQTTv5, client_id="Python test")
+
+def set_Streamer_voltage_value(value):
+    MQTT_topic = "suricube/galaxy_cube/11/analog_signal_generator"
+    publish.single(MQTT_topic, payload=voltage_value_command(value),  hostname="192.168.1.111", port=1884, protocol=mqtt.MQTTv5, client_id="Python test")
+    time.sleep(0.5)
+    publish.single(MQTT_topic, payload=start_command(),  hostname="192.168.1.111", port=1884, protocol=mqtt.MQTTv5, client_id="Python test")
+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../step_signal/" class="btn btn-neutral float-left" title="Signal generation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../step_signal/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../js/mkdocs-charts-plugin.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

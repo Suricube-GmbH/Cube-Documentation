@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Signal generation - Suricube</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Signal generation";
+        var mkdocs_page_input_path = "examples/step_signal.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../..">
+          <img src="../../img/logo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Galaxy Cube</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../hardware_specs/">Hardware specification</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../modules_overview/">Capacities overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../signal_generation_logic/">Signal generation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../usage/">Usage</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">FPGA Modules</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/analog_signal_generator/">Analog signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/digital_signal_generator/">Digital signal generation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/pulse_forwarder/">Pulse forwarder</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/external_triggering/">External triggering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/signal_summer/">Signal summer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/slow_dac/">Slow analog output</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../modules/digital_galvo_driver/">Digital galvomirror</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../webUI/ssp/">Simple scanning pattern</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Code Examples</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Signal generation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#logic">Logic</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code">Code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#resulting-json-code">Resulting JSON code</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../calibration/">Python communication</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="../../../api/api.html">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../update">Update documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../api/api.yaml">Download specification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Suricube</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Code Examples</li>
+      <li class="breadcrumb-item active">Signal generation</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="practical-example-of-signal-generation">Practical example of signal generation</h1>
+<h2 id="logic">Logic</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is work in progress. It might be outdated.</p>
+</div>
+<p>Our goal is to generate a step pattern, which can then either be used in jigsaw or zigzag mode.
+The most straightforward way would be to store every step as a section, and to go over 
+the section in sequential order. However, doing this for a larger (say 2048) number of steps is 
+not possible, as the internal memory for a ASG is only <em>8 kilobytes (~10 sections, and 
+~4000 section orders)</em>.</p>
+<div class="admonition todo">
+<p class="admonition-title">Todo</p>
+<p>Evaluate the actual memory for an ASG</p>
+</div>
+<p>Instead, what we'll do is to generate one section for each repetitive part of the final trace :</p>
+<ul>
+<li>a plateau : constant value for a certain time.</li>
+<li>a step : constant derivative for a short amount of time</li>
+</ul>
+<p>Then, by using a continous transition for each new section, we can steadily make (quasi-)steps.</p>
+<p><vegachart style='width: 100%'  class="vegalite">{
+  "description": "Generated voltage signal",
+  "data": {"values": [
+    {"time": 0, "voltage": 0, "trace": "target"},
+    {"time": 1, "voltage": 0, "trace": "target"},
+    {"time": 1, "voltage": 1, "trace": "target"},
+    {"time": 2, "voltage": 1, "trace": "target"},
+    {"time": 2, "voltage": 2, "trace": "target"},
+    {"time": 3, "voltage": 2, "trace": "target"},
+    {"time": 3, "voltage": 3, "trace": "target"},
+    {"time": 4, "voltage": 3, "trace": "target"},
+    {"time": 4, "voltage": 4, "trace": "target"},
+    {"time": 5, "voltage": 4, "trace": "target"},
+    {"time": 5, "voltage": 0, "trace": "target"},
+    {"time": 6, "voltage": 0, "trace": "target"},
+    {"time": 6, "voltage": 1, "trace": "target"},
+    {"time": 7, "voltage": 1, "trace": "target"},
+    {"time": 7, "voltage": 2, "trace": "target"},
+    {"time": 8, "voltage": 2, "trace": "target"},
+    {"time": 8, "voltage": 3, "trace": "target"},
+    {"time": 9, "voltage": 3, "trace": "target"},
+    {"time": 9, "voltage": 4, "trace": "target"},
+    {"time": 0.0, "voltage": 0, "trace": "effective", "type":"0"},
+    {"time": 0.9, "voltage": 0, "trace": "effective", "type":"1"},
+    {"time": 1.0, "voltage": 1, "trace": "effective", "type":"0"},
+    {"time": 1.9, "voltage": 1, "trace": "effective", "type":"1"},
+    {"time": 2.0, "voltage": 2, "trace": "effective", "type":"0"},
+    {"time": 2.9, "voltage": 2, "trace": "effective", "type":"1"},
+    {"time": 3.0, "voltage": 3, "trace": "effective", "type":"0"},
+    {"time": 3.9, "voltage": 3, "trace": "effective", "type":"1"},
+    {"time": 4.0, "voltage": 4, "trace": "effective", "type":"0"},
+    {"time": 4.9, "voltage": 4, "trace": "effective"},
+    {"time": 5.0, "voltage": 0, "trace": "effective"},
+    {"time": 5.9, "voltage": 0, "trace": "effective"},
+    {"time": 6.0, "voltage": 1, "trace": "effective"},
+    {"time": 6.9, "voltage": 1, "trace": "effective"},
+    {"time": 7.0, "voltage": 2, "trace": "effective"},
+    {"time": 7.9, "voltage": 2, "trace": "effective"},
+    {"time": 8.0, "voltage": 3, "trace": "effective"},
+    {"time": 8.9, "voltage": 3, "trace": "effective"},
+    {"time": 9.0, "voltage": 4, "trace": "effective"}
+  ]},
+  "layer": [
+  {
+    "mark": "line",
+    "encoding": {
+        "x": {"field": "time", "type": "quantitative"},
+        "y": {"field": "voltage", "type": "quantitative"},
+        "color": {"field": "trace", "type": "nominal"},
+        "strokeDash": {"value": [5,2]}    
+    }
+  }, 
+  {
+    "transform" : [ {"filter": "datum.type &gt; 0"} ], 
+    "mark": {"type": "text", "angle": 0, "dx": -10, "dy":-30, "fontSize": 35},
+    "encoding": {        
+        "x": {"field": "time", "type": "quantitative"},
+        "y": {"field": "voltage", "type": "quantitative"},
+        "text": {"value": "⇘" }     
+    }
+  }
+  ]
+}
+</vegachart></p>
+<p>This method has 2 potential problems : </p>
+<ol>
+<li>We wanted to have an 'instant' change of value. To solve this, we need to make use 
+of the fact that the ASG is running faster than the ADC is generating the signal : 
+if it takes 4 ticks for the ADC to change value, and we do our slope in 2 ticks, then 
+the computation is working, and the ADC will never has seen it. </li>
+<li>If we got some errors while doing floating point arithmetic or rounding, then 
+they would accumulate over time, and we might not get the expected output. To solve this, 
+we do a discontinous section transition at every time we reach the end of our pattern.</li>
+</ol>
+<div class="admonition todo">
+<p class="admonition-title">Todo</p>
+<p>Need to change some clocking issue in the FPGA code to be actually able to solve 1.</p>
+</div>
+<h2 id="code">Code</h2>
+<pre class="highlight"><code class="language-rust">pub fn generate_steps(
+    max_voltage: f64,
+    min_voltage: f64,
+    step_width_t: f64, // in ms
+    step_number: u64,
+    do_zigzag: bool,
+    calibration: &amp;ASGParameters,
+) -&gt; Signal {
+    let step_height = (max_voltage - min_voltage) / (step_number as f64 - 1.0);
+    //let rising_time = calibration.ms_to_ticks(0.005 / 71. * 3.) as i64; // currently set at 3 ticks
+    let rising_time = calibration.ms_to_ticks(0.01) as i64; // currently set at 3 ticks
+    // Constant on the min value
+    let plateau_min_value = VoltageSection {
+        duration_in_ms: step_width_t - calibration.ticks_to_ms(rising_time), // total step time is as given
+        starting_level: min_voltage,
+        starting_derivative: 0.0,
+        ending_level: max_voltage,
+        ending_derivative: 0.0,
+        interpolation: Interpolation::Constant,
+    }
+    .convert_to_raw(calibration);
+
+    // constant on the max value
+    let plateau_max_value = VoltageSection {
+        duration_in_ms: step_width_t - calibration.ticks_to_ms(rising_time), // total step time is as given
+        starting_level: max_voltage,
+        starting_derivative: 0.0,
+        ending_level: max_voltage,
+        ending_derivative: 0.0,
+        interpolation: Interpolation::Constant,
+    }
+    .convert_to_raw(calibration);
+
+    let step_up = VoltageSection {
+        // if it's n ticks long, it will have (n-1) steps
+        // so we need to have a steeper slope
+        duration_in_ms: calibration.ticks_to_ms(rising_time - 1),
+        starting_level: 0.0,
+        starting_derivative: 0.0,
+        ending_level: step_height,
+        ending_derivative: 0.0,
+        interpolation: Interpolation::Linear,
+    }
+    .convert_to_raw(calibration)
+    .overwrite_length(rising_time as u64);
+
+    let step_down = VoltageSection {
+        // if it's n ticks long, it will have (n-1) steps
+        // so we need to have a steeper slope
+        duration_in_ms: calibration.ticks_to_ms(rising_time - 1),
+        starting_level: 0.0,
+        starting_derivative: 0.0,
+        ending_level: -step_height,
+        ending_derivative: 0.0,
+        interpolation: Interpolation::Linear,
+    }
+    .convert_to_raw(calibration)
+    .overwrite_length(rising_time as u64);
+
+    // For jigsaw pattern : we go from max to min value directly
+    let step_to_min = VoltageSection {
+        duration_in_ms: calibration.ticks_to_ms(rising_time), // Close to actual value so interpolation is correct
+        starting_level: min_voltage,
+        starting_derivative: 0.0,
+        ending_level: 0.0,
+        ending_derivative: 0.0,
+        interpolation: Interpolation::Constant,
+    }
+    .convert_to_raw(calibration)
+    .overwrite_length(rising_time as u64);
+
+    // If you change the order of the sections, also change the later code !
+    let sections = vec![
+        plateau_min_value, // 0
+        step_up,           // 1
+        step_down,         // 2
+        step_to_min,       // 3
+        plateau_max_value, // 4
+    ];
+
+    // Going up ↗ - zig zag and jigsaw
+    let section_order_up = vec![
+        SectionOrder {
+            number: 0, // min_value
+            transition: Transition::Continous,
+        },
+        SectionOrder {
+            number: 1, // step_up
+            transition: Transition::Continous,
+        },
+    ]
+    .repeat(step_number as usize - 1); // we do the final step and the transition manually
+
+    // Going down ↘ - for zig zag
+    let section_order_down = vec![
+        SectionOrder {
+            number: 4, // Plateau max value
+            transition: Transition::Continous,
+        },
+        SectionOrder {
+            number: 2, // step_down
+            transition: Transition::Continous,
+        },
+    ]
+    .repeat(step_number as usize - 1); // we do the final step and the transition manually
+
+    // Combining everything into the final signal
+    Signal {
+        sections: sections,
+        section_order: if do_zigzag {
+            // zigzag pattern
+            vec![
+                section_order_up,
+                vec![
+                    SectionOrder {
+                        // Force plateau at max value - Resets rounding error
+                        number: 4,
+                        transition: Transition::Discontinous,
+                    },
+                    SectionOrder {
+                        // A step where we don't move
+                        number: 3, // step_to_min : constant + continous =&gt; no changes
+                        transition: Transition::Continous,
+                    },
+                ],
+                section_order_down,
+                vec![
+                    SectionOrder {
+                        // Force plateau at min value - Resets rounding error
+                        number: 0,
+                        transition: Transition::Discontinous,
+                    },
+                    SectionOrder {
+                        // A step where we don't move
+                        number: 3, // step_to_min : constant + continous =&gt; no changes
+                        transition: Transition::Continous,
+                    },
+                ],
+            ]
+            .concat()
+        } else {
+            // jigsaw pattern
+            [
+                //Adding missing final plateau, as well as final transition
+                section_order_up,
+                vec![
+                    SectionOrder {
+                        // Force plateau at max value
+                        number: 4,
+                        transition: Transition::Discontinous,
+                    },
+                    SectionOrder {
+                        // Force step to min value
+                        number: 3,
+                        transition: Transition::Discontinous,
+                    },
+                ],
+            ]
+            .concat()
+        },
+    }
+}</code></pre>
+<h2 id="resulting-json-code">Resulting JSON code</h2>
+<pre class="highlight"><code class="language-JSON">{
+   "sections":[
+      {
+         "s0_0":6434,
+         "s1_0":0,
+         "s2_0":0,
+         "s3_0":0,
+         "length":5571,
+         "interpolation":"constant"
+      },
+      {
+         "s0_0":32696,
+         "s1_0":258573883,
+         "s2_0":0,
+         "s3_0":0,
+         "length":143,
+         "interpolation":"linear"
+      },
+      {
+         "s0_0":32696,
+         "s1_0":-258573883,
+         "s2_0":0,
+         "s3_0":0,
+         "length":143,
+         "interpolation":"linear"
+      },
+      {
+         "s0_0":6434,
+         "s1_0":0,
+         "s2_0":0,
+         "s3_0":0,
+         "length":143,
+         "interpolation":"constant"
+      },
+      {
+         "s0_0":58959,
+         "s1_0":0,
+         "s2_0":0,
+         "s3_0":0,
+         "length":5571,
+         "interpolation":"constant"
+      }
+   ],
+   "section_order":[
+      {
+         "number":0,
+         "transition":"continous"
+      },
+      {
+         "number":1,
+         "transition":"continous"
+      },
+      {
+         "number":0,
+         "transition":"continous"
+      },
+      {
+         "number":1,
+         "transition":"continous"
+      },
+      {
+         "number":0,
+         "transition":"continous"
+      },
+      {
+         "number":1,
+         "transition":"continous"
+      },
+      {
+         "number":4,
+         "transition":"discontinous"
+      },
+      {
+         "number":3,
+         "transition":"discontinous"
+      }
+   ]
+}</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../webUI/ssp/" class="btn btn-neutral float-left" title="Simple scanning pattern"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../calibration/" class="btn btn-neutral float-right" title="Python communication">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../webUI/ssp/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../calibration/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../js/mkdocs-charts-plugin.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+
+        <script>
+        var mkdocs_chart_plugin = {'data_path': '', 'use_data_path': 'True', 'vega_theme': 'default', 'vega_theme_dark': 'dark', 'vega_renderer': 'svg', 'vega_width': 'container', 'fallback_width': '800', 'path_to_homepage': '../..'}
+        </script>
+        </body>
+</html>
