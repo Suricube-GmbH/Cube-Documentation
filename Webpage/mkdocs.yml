@@ -13,6 +13,7 @@ extra_javascript:
 plugins:
   - search
   - charts
+  #- mermaid2
   #- with-pdf:
       #render_js: true
       #headless_chrome_path: chromium-browser
@@ -33,12 +34,17 @@ markdown_extensions:
 nav:
   - Galaxy Cube: index.md
   - Hardware specification: hardware_specs.md
+  - Capacities overview: modules_overview.md
   - Signal generation: signal_generation_logic.md
   - Usage: usage.md
-  - Modules:
-      - Analog signal generation: ./analog_signal_generator.md
-      - Digital signal generation: ./digital_signal_generator.md
-      - External triggering: ./external_triggering.md 
+  - FPGA Modules:
+      - Analog signal generation: ./modules/analog_signal_generator.md
+      - Digital signal generation: ./modules/digital_signal_generator.md
+      - Pulse forwarder: ./modules/pulse_forwarder.md 
+      - External triggering: ./modules/external_triggering.md 
+      - Signal summer : ./modules/signal_summer.md
+      - Slow analog output : ./modules/slow_dac.md
+      - Digital galvomirror : ./modules/digital_galvo_driver.md
   - Applications :
     - Simple scanning pattern : ./webUI/ssp.md
   - Code Examples:

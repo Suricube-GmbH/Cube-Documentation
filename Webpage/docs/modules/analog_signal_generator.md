@@ -25,3 +25,6 @@ These are values you shouldn't have to touch or change yourself.
 - upshifting
 - downshifting
 - cycles_per_iteration
+
+!!! TODO
+    Add a list of all the hardware parameters ?

@@ -15,3 +15,6 @@ For pdf export (not working on Windows):
 - ```pip install mkdocs-with-pdf```
 - ```pip install weasyprint==52.2```
 - ```sudo apt install libpango1.0-dev```
+
+mermaid support : 
+```pip install mkdocs-mermaid2-plugin ```
